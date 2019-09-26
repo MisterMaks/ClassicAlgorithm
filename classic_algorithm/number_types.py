@@ -28,7 +28,7 @@ def positive(number):
 
 def whole(number):
     number = real(number)
-    if number * 10 % 10 == 0:
+    if number - int(number) == 0:
         return int(number)
     else:
         print()
