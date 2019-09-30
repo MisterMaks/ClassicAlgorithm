@@ -8,8 +8,8 @@ def probability(number):
     else:
         print()
         if number < 0:
-            print("Error: Вероятность < 0")
+            print("Error: {} < 0".format(number))
         else:
-            print("Error: Вероятность > 1")
+            print("Error: {} > 1".format(number))
         print("Повторите ввод")
         return probability(input())

@@ -3,14 +3,14 @@ def real(number):
     for i in number:
         if i not in number_lst:
             print()
-            print("Error: Это не число!")
+            print("Error: {} - не число!".format(number))
             print("Повторите ввод")
             return real(input())
     try:
         return float(number)
     except ValueError:
         print()
-        print("Error: Это не число!")
+        print("Error: {} - не число!".format(number))
         print("Повторите ввод")
         return real(input())
 
@@ -21,7 +21,7 @@ def positive(number):
         return number
     else:
         print()
-        print("Error: Число <= 0")
+        print("Error: {} <= 0".format(number))
         print("Повторите ввод")
         return positive(input())
 
@@ -32,7 +32,7 @@ def whole(number):
         return int(number)
     else:
         print()
-        print("Error: Нецелое число")
+        print("Error: {} - нецелое число".format(number))
         print("Повторите ввод")
         return whole(input())
 
@@ -43,6 +43,6 @@ def natural(number):
         return int(number)
     else:
         print()
-        print("Error: Ненатуральное число")
+        print("Error: {} - ненатуральное число".format(number))
         print("Повторите ввод")
         return natural(input())

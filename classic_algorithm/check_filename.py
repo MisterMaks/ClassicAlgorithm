@@ -7,5 +7,5 @@ def check_filename(filename):
         return filename
     else:
         print()
-        print("Файл не найден! Попробуйте еще раз!")
+        print("Файл '{}' не найден! Попробуйте еще раз!".format(filename))
         return check_filename(input())
