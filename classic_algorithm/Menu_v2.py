@@ -1,9 +1,10 @@
 # import pandas as pd
-# import time
+import time
 
 from number_types import real, positive, natural
 from probability import probability
 from check_filename import check_filename
+from fitness_all_type_types import check_fitness_all_type_types as check_fit_types
 
 
 class Menu_of_classic_genetic_algorithm:
@@ -13,7 +14,7 @@ class Menu_of_classic_genetic_algorithm:
         self.task_dict = task_dict
 
         self.common_options = [{"n_iter": None, "type": "natural"}, {"eps": None, "type": "positive"},
-                               {"fitness_all_type": None, "type": "str"},
+                               {"fitness_all_type": None, "type": "fit"},
                                {"parent_selection_type": None, "type": "str"},
                                {"cross_type": None, "type": "str"}, {"p_cross": None, "type": "probability"},
                                {"mutation_type": None, "type": "str"},
@@ -22,7 +23,8 @@ class Menu_of_classic_genetic_algorithm:
 
         self.functions_for_type = {"float": float, "int": int, "str": str,
                                    "probability": probability, "positive": positive,
-                                   "natural": natural, "real": real, "filename": check_filename}
+                                   "natural": natural, "real": real, "filename": check_filename,
+                                   "fit": check_fit_types}
 
         # Дополнительные возможности для разработчика!!! Работа данного блока кода не предусмотрена!!!
 
@@ -37,6 +39,9 @@ class Menu_of_classic_genetic_algorithm:
         self.task_dict_full["options"] = self.common_options + self.task_dict_full["options"]
 
         self.input_data()
+        print("SUCCESSFUL")
+        self.unpack_options()
+        self.unpack_task_with_options()
 
     def check_types_options(self):
         for option in self.task_dict["options"]:
@@ -61,12 +66,13 @@ class Menu_of_classic_genetic_algorithm:
 
             print(message)
 
-            # time.sleep(0.0001)
+            time.sleep(0.1)
 
             while True:
                 try:
                     input_data = input()
                     self.task_dict_full["options"][option][option_key] = function(input_data)
+                    print("-" * len(message))
                     break
                 except ValueError:
                     print()
@@ -77,6 +83,20 @@ class Menu_of_classic_genetic_algorithm:
                     continue
             print()
 
+        return None
+
+    def unpack_options(self):
+        self.options = {}
+        for option in self.task_dict["options"]:
+            option_key = list(option.keys())[0]
+            option_value = option[option_key]
+            self.options[option_key] = option_value
+        return None
+
+    def unpack_task_with_options(self):
+        self.task_with_options = {}
+        self.task_with_options["task"] = self.task_dict_full["task"]
+        self.task_with_options.update(self.options)
         return None
 
     # Дополнительные возможности для разработчика!!! Работа данного блока кода не предусмотрена!!!
