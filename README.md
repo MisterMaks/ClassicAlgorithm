@@ -2,7 +2,7 @@
 
 # Скачайте zip архив, там все файлы
 
-![] (https://github.com/MisterMaks/ClassicAlgorithm/blob/master/images/instruction_img.png) 
+![](https://github.com/MisterMaks/ClassicAlgorithm/blob/master/images/instruction_img.png) 
 
 # Для работы вам понадобятся файлы из папки 'classic_algorithm': 'Menu.py', 'number_types.py', 'check_filename.py', 'fitness_all_type_types.py', 'probability.py' 
 
