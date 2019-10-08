@@ -57,7 +57,6 @@ class Menu_of_classic_genetic_algorithm:
         return None
 
     def input_data(self):
-        option_key = 0
         for option in range(len(self.task_dict_full["options"])):
             option_key = list(self.task_dict_full["options"][option].keys())[0]
             type_of_data = self.task_dict_full["options"][option]["type"]
@@ -80,7 +79,14 @@ class Menu_of_classic_genetic_algorithm:
                 print(self.task_dict_full["options"][option][option_key])
             elif input_data == "":
                 input_data = str(self.task_dict_full["options"][option][option_key])
-                self.task_dict_full["options"][option][option_key] = function(input_data)
+                try:
+                    self.task_dict_full["options"][option][option_key] = function(input_data, ret_er=True)
+                    if self.task_dict_full["options"][option][option_key] != "Error":
+                        print(self.task_dict_full["options"][option][option_key])
+                    while self.task_dict_full["options"][option][option_key] == "Error":
+                        self.task_dict_full["options"][option][option_key] = function(input(), ret_er=True)
+                except TypeError:
+                    self.task_dict_full["options"][option][option_key] = function(input_data)
             else:
                 self.task_dict_full["options"][option][option_key] = function(input_data)
             print("-" * len(message))
