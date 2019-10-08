@@ -5,11 +5,13 @@
 ![](https://github.com/MisterMaks/ClassicAlgorithm/blob/master/images/instruction_img.png) 
 
 ## Для работы вам понадобятся файлы из папки 'classic_algorithm': 
-* 'Menu.py', 
-* 'number_types.py', 
-* 'check_filename.py', 
-* 'fitness_all_type_types.py', 
+* 'Menu.py'
+* 'number_types.py'
+* 'check_filename.py'
+* 'fitness_all_type_types.py'
 * 'probability.py' 
+
+## Пример работы программы вы можете увидеть здесь, ниже, или в папке 'classic_algorithm', файл 'Launch_Menu_v2.ipynb'
 
 # Импортируем класс для чтения вводимых данных: Menu_of_classic_genetic_algoritm
 
