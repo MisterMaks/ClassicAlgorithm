@@ -26,7 +26,7 @@ class Menu_of_classic_genetic_algorithm:
         self.functions_for_type = {"float": float, "int": int, "str": str,
                                    "probability": probability, "positive": positive,
                                    "natural": natural, "real": real, "filename": check_filename,
-                                   "fit": check_fit_types, "list_options": check_user_choice}
+                                   "fit": check_fit_types}
 
         self.unpack_common_options()
 
@@ -65,7 +65,7 @@ class Menu_of_classic_genetic_algorithm:
             option_key = list(self.task_dict_full["options"][option].keys())[0]
             type_of_data = self.task_dict_full["options"][option]["type"]
             if isinstance(type_of_data, list):
-                function = self.functions_for_type["list_options"]
+                function = check_user_choice
             else:
                 function = self.functions_for_type[type_of_data]
 
