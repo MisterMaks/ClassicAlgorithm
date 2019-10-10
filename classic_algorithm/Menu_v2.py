@@ -15,11 +15,11 @@ class Menu_of_classic_genetic_algorithm:
         self.task_dict = task_dict
 
         self.common_options = [{"n_iter": 50, "type": "natural"}, {"eps": 0.5, "type": "positive"},
-                               {"fitness_all_type": "max", "type": "fit"},
-                               {"parent_selection_type": "something", "type": "str"},
-                               {"cross_type": "something", "type": "str"},
+                               {"fitness_all_type": "max", "type": ["max", "min", "mean"]},
+                               {"parent_selection_type": "roulet", "type": ["roulet", "tournament"]},
+                               {"cross_type": "one_point", "type": ["one_point", "two_point"]},
                                {"p_cross": 0.5, "type": "probability"},
-                               {"mutation_type": "something", "type": "str"},
+                               {"mutation_type": "simple", "type": ["simple", "other"]},
                                {"p_mutation": 0.1, "type": "probability"},
                                {"size_of_population": 50, "type": "natural"}]
 
