@@ -5,6 +5,7 @@ from number_types import real, positive, natural
 from probability import probability
 from check_filename import check_filename
 from fitness_all_type_types import check_fitness_all_type_types as check_fit_types
+from list_options import menu_list, check_user_choice, print_menu
 
 
 class Menu_of_classic_genetic_algorithm:
@@ -25,7 +26,7 @@ class Menu_of_classic_genetic_algorithm:
         self.functions_for_type = {"float": float, "int": int, "str": str,
                                    "probability": probability, "positive": positive,
                                    "natural": natural, "real": real, "filename": check_filename,
-                                   "fit": check_fit_types}
+                                   "fit": check_fit_types, "list_options": check_user_choice}
 
         self.unpack_common_options()
 
@@ -50,6 +51,8 @@ class Menu_of_classic_genetic_algorithm:
 
     def check_types_options(self):
         for option in self.task_dict["options"]:
+            if isinstance(option["type"], list):
+                return None
             if option["type"] not in self.functions_for_type.keys():
                 print()
                 print("Ошибка типа данных! Проверьте типы!!!")
@@ -57,14 +60,22 @@ class Menu_of_classic_genetic_algorithm:
         return None
 
     def input_data(self):
+        dict_with_options = None
         for option in range(len(self.task_dict_full["options"])):
             option_key = list(self.task_dict_full["options"][option].keys())[0]
             type_of_data = self.task_dict_full["options"][option]["type"]
-            function = self.functions_for_type[type_of_data]
+            if isinstance(type_of_data, list):
+                function = self.functions_for_type["list_options"]
+            else:
+                function = self.functions_for_type[type_of_data]
 
             if type_of_data is "filename":
                 message = ("Введите имя файла для '{}'\n" +
-                           "hint: (файл должен находиться в текущей директории):").format(option_key)
+                           "(hint: файл должен находиться в текущей директории):").format(option_key)
+            elif isinstance(type_of_data, list):
+                dict_with_options = menu_list(type_of_data)
+                message = "Выберете '{}'\n(hint: нужно ввести номер варианта):\n".format(option_key) + \
+                          print_menu(dict_with_options)
             else:
                 message = "Введите '{}':".format(option_key)
 
@@ -74,22 +85,43 @@ class Menu_of_classic_genetic_algorithm:
 
             input_data = input()
             if input_data == "" and option_key in list(self.dict_common_options.keys()):
-                input_data = str(self.task_dict_full["options"][option][option_key])
-                self.task_dict_full["options"][option][option_key] = function(input_data)
+                if isinstance(type_of_data, list):
+                    input_data = self.task_dict_full["options"][option][option_key]
+                else:
+                    input_data = str(self.task_dict_full["options"][option][option_key])
+                if isinstance(type_of_data, list):
+                    self.task_dict_full["options"][option][option_key] = function(input_data, dict_with_options,
+                                                                                  ret_er=False, default=True)
+                else:
+                    self.task_dict_full["options"][option][option_key] = function(input_data)
                 print(self.task_dict_full["options"][option][option_key])
             elif input_data == "":
-                input_data = str(self.task_dict_full["options"][option][option_key])
+                if isinstance(type_of_data, list):
+                    input_data = self.task_dict_full["options"][option][option_key]
+                else:
+                    input_data = str(self.task_dict_full["options"][option][option_key])
                 try:
-                    self.task_dict_full["options"][option][option_key] = function(input_data, ret_er=True)
+                    if isinstance(type_of_data, list):
+                        self.task_dict_full["options"][option][option_key] = function(input_data, dict_with_options,
+                                                                                      ret_er=True, default=True)
+                    else:
+                        self.task_dict_full["options"][option][option_key] = function(input_data, ret_er=True)
                     if self.task_dict_full["options"][option][option_key] != "Error":
                         print(self.task_dict_full["options"][option][option_key])
                     while self.task_dict_full["options"][option][option_key] == "Error":
-                        self.task_dict_full["options"][option][option_key] = function(input(), ret_er=True)
+                        if isinstance(type_of_data, list):
+                            self.task_dict_full["options"][option][option_key] = function(input(), dict_with_options,
+                                                                                          ret_er=True)
+                        else:
+                            self.task_dict_full["options"][option][option_key] = function(input(), ret_er=True)
                 except TypeError:
                     self.task_dict_full["options"][option][option_key] = function(input_data)
             else:
-                self.task_dict_full["options"][option][option_key] = function(input_data)
-            print("-" * len(message))
+                if isinstance(type_of_data, list):
+                    self.task_dict_full["options"][option][option_key] = function(input_data, dict_with_options)
+                else:
+                    self.task_dict_full["options"][option][option_key] = function(input_data)
+            print("-" * 22)
 
             print()
 

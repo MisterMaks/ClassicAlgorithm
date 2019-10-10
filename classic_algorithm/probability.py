@@ -2,7 +2,7 @@ from number_types import real
 
 
 def probability(number, ret_er=False):
-    number = real(number)
+    number = real(number, ret_er)
     if number == "Error" and ret_er:
         return "Error"
     if 0 <= number <= 1:

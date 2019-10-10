@@ -10,6 +10,7 @@
 * 'check_filename.py'
 * 'fitness_all_type_types.py'
 * 'probability.py' 
+* 'list_options.py'
 
 ## Пример работы программы вы можете увидеть здесь, ниже, или в папке 'classic_algorithm', файл 'Launch_Menu_v2.ipynb'
 
@@ -36,6 +37,10 @@ from Menu_v2 import Menu_of_classic_genetic_algorithm as menu
 7. Также есть поддержка основных типов int, float - если будете их использовать, то ошибки и невалидные данные обрабатывайте сами!!!
 
 ** Типы данных указываются в словаре в кавычках
+
+# Дополнительные возможности
+В "type" можно передать список. Например: {... "type": [1, 2, 3]}.
+Тогда будет появляться меню с вариантами из этого списка. В этом случае пользователь будет ограничен вариантами из этого списка. В качестве значения по умолчанию можно установить значение из этого списка, но если пользователь выбирает какой-то из вариантов, то он должен написать номер этого варианта. В итоговые значения записывается выбранный вариант.
 
 # Примеры словарей для "Отбора признаков" и "Коммивояжера"
 
@@ -261,6 +266,193 @@ menu_for_def_val = menu(feature_selection_with_def_val)
     ------------------------------------------------------------------------------------
     
     SUCCESSFUL
+
+
+# Тестовый пример, для демонстрации передачи списка в "type"
+
+
+```python
+test_task = {"task": "test_task", "options": [{"test_option": None, "type": [11, 22, 33]}]}
+```
+
+
+```python
+test_menu = menu(test_task)
+```
+
+    Введите 'n_iter':
+    
+    50
+    ----------------------
+    
+    Введите 'eps':
+    
+    0.5
+    ----------------------
+    
+    Введите 'fitness_all_type':
+    
+    max
+    ----------------------
+    
+    Введите 'parent_selection_type':
+    
+    something
+    ----------------------
+    
+    Введите 'cross_type':
+    
+    something
+    ----------------------
+    
+    Введите 'p_cross':
+    
+    0.5
+    ----------------------
+    
+    Введите 'mutation_type':
+    
+    something
+    ----------------------
+    
+    Введите 'p_mutation':
+    
+    0.1
+    ----------------------
+    
+    Введите 'size_of_population':
+    
+    50
+    ----------------------
+    
+    Выберете 'test_option'
+    (hint: нужно ввести номер варианта):
+        1. 11
+        2. 22
+        3. 33
+    
+    1
+    
+    1. 11
+    ----------------------
+    
+    SUCCESSFUL
+
+
+
+```python
+# Созданный словарь
+test_menu.task_dict_full
+```
+
+
+
+
+    {'task': 'test_task',
+     'options': [{'n_iter': 50, 'type': 'natural'},
+      {'eps': 0.5, 'type': 'positive'},
+      {'fitness_all_type': 'max', 'type': 'fit'},
+      {'parent_selection_type': 'something', 'type': 'str'},
+      {'cross_type': 'something', 'type': 'str'},
+      {'p_cross': 0.5, 'type': 'probability'},
+      {'mutation_type': 'something', 'type': 'str'},
+      {'p_mutation': 0.1, 'type': 'probability'},
+      {'size_of_population': 50, 'type': 'natural'},
+      {'test_option': 11, 'type': [11, 22, 33]}]}
+
+
+
+## Тестовый пример, для демонстрации передачи списка в "type" со значением по умолчанию
+
+
+```python
+test_task_with_def_val = {"task": "test_task", "options": [{"test_option": 11, "type": [11, 22, 33]}]}
+```
+
+
+```python
+test_menu_with_def_val = menu(test_task_with_def_val)
+```
+
+    Введите 'n_iter':
+    
+    50
+    ----------------------
+    
+    Введите 'eps':
+    
+    0.5
+    ----------------------
+    
+    Введите 'fitness_all_type':
+    
+    max
+    ----------------------
+    
+    Введите 'parent_selection_type':
+    
+    something
+    ----------------------
+    
+    Введите 'cross_type':
+    
+    something
+    ----------------------
+    
+    Введите 'p_cross':
+    
+    0.5
+    ----------------------
+    
+    Введите 'mutation_type':
+    
+    something
+    ----------------------
+    
+    Введите 'p_mutation':
+    
+    0.1
+    ----------------------
+    
+    Введите 'size_of_population':
+    
+    50
+    ----------------------
+    
+    Выберете 'test_option'
+    (hint: нужно ввести номер варианта):
+        1. 11
+        2. 22
+        3. 33
+    
+    
+    11
+    ----------------------
+    
+    SUCCESSFUL
+
+
+
+```python
+# Созданный словарь
+test_menu_with_def_val.task_dict_full
+```
+
+
+
+
+    {'task': 'test_task',
+     'options': [{'n_iter': 50, 'type': 'natural'},
+      {'eps': 0.5, 'type': 'positive'},
+      {'fitness_all_type': 'max', 'type': 'fit'},
+      {'parent_selection_type': 'something', 'type': 'str'},
+      {'cross_type': 'something', 'type': 'str'},
+      {'p_cross': 0.5, 'type': 'probability'},
+      {'mutation_type': 'something', 'type': 'str'},
+      {'p_mutation': 0.1, 'type': 'probability'},
+      {'size_of_population': 50, 'type': 'natural'},
+      {'test_option': 11, 'type': [11, 22, 33]}]}
+
 
 
 
